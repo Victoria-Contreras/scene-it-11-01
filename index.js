@@ -28,8 +28,14 @@ function renderMovies(movieArray) {
 
 const myForm = document.getElementById('search-form');
     myForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.querySelector(".movies-container").innerHTML = renderMovies(movieData);
+        e.preventDefault();
+        const searchString = document.getElementById('search-result').value;
+        const urlEncodedSearchString = encodeURIComponent(searchString);
+        fetch("http://www.omdbapi.com/?apikey=59354c85&s=" + urlEncodedSearchString).then(response => {
+            return response.json();
+        }).then(data => {
+            document.querySelector(".movies-container").innerHTML = renderMovies(data.Search);
+        })
 })
 
 function saveToWatchlist(movieID) {

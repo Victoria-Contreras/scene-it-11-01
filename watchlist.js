@@ -1,12 +1,12 @@
-const localWatchlist = localStorage.getItem('watchlist')
+const localWatchlist = localStorage.getItem('watchlist');
 const watchListUsable = JSON.parse(localWatchlist);
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector(".watchlist-container").innerHTML = renderWatchlist(watchListUsable);
 
 })
 
 function renderWatchlist(listArray) {
-    console.log(listArray)
      watchlistHtmlArray = listArray.map(function (currentMovie) {
         return `
             <div class="movie card text-center">
