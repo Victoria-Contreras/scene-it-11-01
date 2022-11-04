@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('add-button')) {
-            //console.log(e.target.dataset.imdbid)
             const movieID = e.target.dataset.imdbid;
-            //console.log(movieID)
             saveToWatchlist(movieID);
             
         }
