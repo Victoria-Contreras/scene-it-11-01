@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector(".movies-container").innerHTML = renderMovies(movieData);
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('add-button')) {
+            //console.log(e.target.dataset.imdbid)
+            const movieID = e.target.dataset.imdbid;
+            //console.log(movieID)
+            saveToWatchlist(movieID);
+            
+        }
+    })
 });
 
 function renderMovies(movieArray) {
@@ -12,7 +20,7 @@ function renderMovies(movieArray) {
                     <p id="release-date">${currentMovie.Year}</p>
                 </div>
                 <div class="card-footer">
-                    <button>Add</button>
+                    <button class="add-button" data-imdbid="${currentMovie.imdbID}">Add</button>
                 </div>
             </div>
         `
@@ -20,4 +28,23 @@ function renderMovies(movieArray) {
     return movieHtmlArray.join('')
 }
 
-// Pick up at part 1 step 3
+const myForm = document.getElementById('search-form');
+    myForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.querySelector(".movies-container").innerHTML = renderMovies(movieData);
+})
+
+function saveToWatchlist(movieID) {
+    console.log(movieID)
+    const movie = movieData.find(function (currentMovie) {
+        return currentMovie.imdbID == movieID; 
+    })
+    let watchlistJSON = localStorage.getItem('watchlist');
+    let watchlist = JSON.parse(watchlistJSON);
+    if (watchlist == null) {
+        watchlist = [];
+    }
+    watchlist.push(movie);
+    watchlistJSON = JSON.stringify(watchlist);
+    localStorage.setItem('watchlist', watchlistJSON);
+}
