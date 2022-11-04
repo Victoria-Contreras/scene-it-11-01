@@ -35,12 +35,13 @@ const myForm = document.getElementById('search-form');
             return response.json();
         }).then(data => {
             document.querySelector(".movies-container").innerHTML = renderMovies(data.Search);
+            movieSearchData = data.Search
         })
 })
 
 function saveToWatchlist(movieID) {
     console.log(movieID)
-    const movie = movieData.find(function (currentMovie) {
+    const movie = movieSearchData.find(function (currentMovie) {
         return currentMovie.imdbID == movieID; 
     })
     let watchlistJSON = localStorage.getItem('watchlist');
@@ -52,3 +53,4 @@ function saveToWatchlist(movieID) {
     watchlistJSON = JSON.stringify(watchlist);
     localStorage.setItem('watchlist', watchlistJSON);
 }
+
