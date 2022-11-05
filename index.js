@@ -31,7 +31,7 @@ const myForm = document.getElementById('search-form');
         e.preventDefault();
         const searchString = document.getElementById('search-result').value;
         const urlEncodedSearchString = encodeURIComponent(searchString);
-        fetch("http://www.omdbapi.com/?apikey=59354c85&s=" + urlEncodedSearchString).then(response => {
+        fetch("https://www.omdbapi.com/?apikey=59354c85&s=" + urlEncodedSearchString).then(response => {
             return response.json();
         }).then(data => {
             document.querySelector(".movies-container").innerHTML = renderMovies(data.Search);
